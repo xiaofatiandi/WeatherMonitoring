@@ -120,8 +120,11 @@ Unittests are included in the `_test.go` files.
 I also implement a `logger` class in `/logger` to support better logging. 
 
 
-## Future improvements:
-One  thing that I didn't do here is that currently I hard coded the port and server ip using localhost:8000, these can be moved to a configuration file, and main.go should read those values from configuration file, and docker deployment should also use the same values 
+## Possible future improvements:
+- One  thing that I didn't do here is that currently I hard coded the port and server ip using localhost:8000, these can be moved to a configuration file, and main.go should read those values from configuration file, and docker deployment should also use the same values 
+
+- Do more check on the device_id to make sure it is in valid format
+- Do more check on temperature to make sure it is not out of range
 
 
 # Screenshots for running program
