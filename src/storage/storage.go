@@ -1,3 +1,7 @@
+/*
+- Define Storage interface to store and retrieve data
+- Implement the Storage interface using in-memory storage
+*/
 package storage
 
 import (

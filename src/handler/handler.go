@@ -1,3 +1,6 @@
+/*
+Web request handler class
+*/
 package handler
 
 import (

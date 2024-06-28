@@ -1,3 +1,6 @@
+/*
+Logger class to log in good format
+*/
 package logger
 
 import (
