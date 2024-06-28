@@ -20,7 +20,7 @@ This service provides these functionalities:
 # How to run 
 You may either run the service on local or on docker.  
 ## Run on local
-Requirement: need to install go sdk 
+**Requirement: need to install go sdk**. (Check https://go.dev/dl/ for installation)
 
 To start the service, in a terminal, run :
 ```
@@ -113,7 +113,9 @@ Unittests are included in the `_test.go` files.
 
  ### 3. Storage ( `/storage`)
   
-  `Storage` interface decouples the code from specific implementation. This makes the code more flexible and easier to maintain. For this example, I implement a simple `InMemoryStorage` in this project for now as I don't have a local database and want to make it simple. But if in the future, we need to switch to use database, we only need to create a new implementation of the `Storage` interface with database, and no need to change any other code. 
+  `Storage` interface decouples the code from specific implementation. This makes the code more flexible and easier to maintain. For this example, I implement a simple `InMemoryStorage` in this project for now as I don't have a local database and want to make it simple. But if in the future, we need to switch to use database, we only need to create a new implementation of the `Storage` interface with database, and no need to change any other code.
+
+  Also use `mutex lock` to guard the memory access on `InMemoryStorage` for safe write and read to the map stored in memory.
 
 
 ### Logger (`/logger`)

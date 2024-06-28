@@ -20,7 +20,7 @@ type Storage interface {
 
 // InMemoryStore is an in-memory implementation of the Storage interface
 type InMemoryStorage struct {
-	mu          sync.RWMutex
+	mu          sync.RWMutex                 // lock for memory access
 	devices     map[string]bool              //store devices and if they are enabled
 	temperature map[string][]TemperatureData //store devices and the temparature data reported by them
 	logger      logger.Logger
@@ -43,8 +43,8 @@ func (s *InMemoryStorage) EnrollDevice(deviceID string) {
 }
 
 func (s *InMemoryStorage) ListDevices() map[string]bool {
-	s.mu.Lock()
-	defer s.mu.Unlock()
+	s.mu.RLock()
+	defer s.mu.RUnlock()
 	return s.devices
 }
 
