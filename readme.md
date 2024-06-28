@@ -51,6 +51,11 @@ curl -X POST http://localhost:8000/devices/804baf2e-da41-4e37-b81d-f16763f0f932
 curl -X GET http://localhost:8000/devices                                            
 ```
 
+- Disable a device:
+```
+curl -X POST http://localhost:8000/device/disable/804baf2e-da41-4e37-b81d-f16763f0f932        
+```
+
 - Post a temperature from a device
 ```
 curl -X POST http://localhost:8000/temperature \
@@ -95,7 +100,7 @@ I have created the Dockerfile for building docker image. Build the image and dep
     Dockerfile
         
 ```
-
+Unittests are included in the `_test.go` files.
 
 ## For design, I divide the service implementation into three main components:
 
@@ -104,7 +109,6 @@ I have created the Dockerfile for building docker image. Build the image and dep
 
 ### 2. Web request handler (`/handler`)
   
-  
   `handler` class  defines the functions to handle all web requests which will call `Storage` interface to store and retrieve data
 
  ### 3. Storage ( `/storage`)
@@ -112,8 +116,18 @@ I have created the Dockerfile for building docker image. Build the image and dep
   `Storage` interface decouples the code from specific implementation. This makes the code more flexible and easier to maintain. For this example, I implement a simple `InMemoryStorage` in this project for now as I don't have a local database and want to make it simple. But if in the future, we need to switch to use database, we only need to create a new implementation of the `Storage` interface with database, and no need to change any other code. 
 
 
+### Logger (`/logger`)
 I also implement a `logger` class in `/logger` to support better logging. 
 
 
 ## Future improvements:
 One  thing that I didn't do here is that currently I hard coded the port and server ip using localhost:8000, these can be moved to a configuration file, and main.go should read those values from configuration file, and docker deployment should also use the same values 
+
+
+# Screenshots for running program
+
+## run on local:
+![My Image Description](screenshots/Screenshot1.png)
+
+## run on docker
+![My Image Description](screenshots/Screenshot2.png)

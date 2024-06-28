@@ -40,14 +40,11 @@ func (s *InMemoryStorage) EnrollDevice(deviceID string) {
 	defer s.mu.Unlock()
 
 	s.devices[deviceID] = true
-	s.logger.Info("call storage.EnrollDevice():", s.devices)
 }
 
 func (s *InMemoryStorage) ListDevices() map[string]bool {
 	s.mu.Lock()
 	defer s.mu.Unlock()
-	s.logger.Info("call storage.ListDevices():", s.devices)
-
 	return s.devices
 }
 

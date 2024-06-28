@@ -25,7 +25,6 @@ func NewHandler(storage storage.Storage, logger logger.Logger) *Handler {
 
 func (h *Handler) EnrollDevice(w http.ResponseWriter, r *http.Request) {
 	h.logger.Info("call handler.EnrollDevice()")
-
 	vars := mux.Vars(r)
 	deviceID := vars["id"]
 	h.storage.EnrollDevice(deviceID)
@@ -35,11 +34,11 @@ func (h *Handler) EnrollDevice(w http.ResponseWriter, r *http.Request) {
 func (h *Handler) ListDevices(w http.ResponseWriter, r *http.Request) {
 	h.logger.Info("Call handler.ListDevices()")
 	devices := h.storage.ListDevices()
-	h.logger.Info("List all devices:", devices)
 	json.NewEncoder(w).Encode(devices)
 }
 
 func (h *Handler) EnableDevice(w http.ResponseWriter, r *http.Request) {
+	h.logger.Info("call handler.EnableDevice()")
 	vars := mux.Vars(r)
 	deviceID := vars["id"]
 
@@ -54,6 +53,7 @@ func (h *Handler) EnableDevice(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) DisableDevice(w http.ResponseWriter, r *http.Request) {
+	h.logger.Info("call handler.DisableDevice()")
 	vars := mux.Vars(r)
 	deviceID := vars["id"]
 
@@ -68,6 +68,7 @@ func (h *Handler) DisableDevice(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) SubmitTemperature(w http.ResponseWriter, r *http.Request) {
+	h.logger.Info("call handler.SubmitTemperature()")
 	var req struct {
 		DeviceID    string  `json:"device_id"`
 		Temperature float64 `json:"temperature"`
@@ -88,6 +89,7 @@ func (h *Handler) SubmitTemperature(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) GetAggregatedTemperature(w http.ResponseWriter, r *http.Request) {
+	h.logger.Info("call handler.GetAggregatedTemperature()")
 	aggregatedData := h.storage.GetDailyAggregatedData(time.Now())
 	json.NewEncoder(w).Encode(aggregatedData)
 }
